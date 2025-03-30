@@ -1,5 +1,7 @@
 const express = require("express");
 const puppeteer = require("puppeteer");
+const serverless = require("serverless-http");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -47,4 +49,7 @@ app.get("/scrape", async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 });
+
+module.exports = app;
+module.exports.handler = serverless(app);
 
